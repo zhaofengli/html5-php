@@ -916,7 +916,7 @@ class Tokenizer
      * see if the input stream is at the start of a
      * '</script>' string.
      */
-    protected function sequenceMatches($sequence)
+    protected function sequenceMatches($sequence,$caseinsensitive=false)
     {
         $len = strlen($sequence);
         $buffer = '';
@@ -932,7 +932,10 @@ class Tokenizer
         }
 
         $this->scanner->unconsume($len);
-        return $buffer == $sequence;
+	if(!$caseinsensitive)
+            return strtolower($buffer) == strtolower($sequence);
+	else
+            return $buffer == $sequence;
     }
 
     /**
