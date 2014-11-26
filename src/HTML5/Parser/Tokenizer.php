@@ -203,7 +203,7 @@ class Tokenizer
         $sequence = '</' . $this->untilTag . '>';
         $txt = '';
         $tok = $this->scanner->current();
-        while ($tok !== false && ! ($tok == '<' && ($this->sequenceMatches($sequence) || $this->sequenceMatches(strtoupper($sequence))))) {
+        while ($tok !== false && ! ($tok == '<' && ($this->sequenceMatches($sequence,true) || $this->sequenceMatches(strtoupper($sequence))))) {
             if ($tok == '&') {
                 $txt .= $this->decodeCharacterReference();
                 $tok = $this->scanner->current();
