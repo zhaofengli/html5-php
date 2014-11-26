@@ -567,6 +567,15 @@ class TokenizerTest extends \Masterminds\HTML5\Tests\TestCase
         }
     }
 
+    public function testRCDATATagClosing()
+    {
+        $events = $this->parse('<Title>Test title</Title>');
+        $this->assertEventEquals('startTag', 'title', $events->get(0));
+        $this->assertEventEquals('text', 'Test title', $events->get(1));
+        $this->assertEventEquals('endTag', 'title', $events->get(2));
+        $this->assertEventEquals('eof', null, $events->get(3));
+    }
+
     /**
      * @depends testCharacterReference
      */
